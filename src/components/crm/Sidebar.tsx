@@ -35,7 +35,7 @@ const Sidebar = () => {
                     <li>
 
                         <Link
-
+                            
                             className="flex items-center text-sm gap-4 py-2 px-4 rounded-lg hover:bg-[#131517] transition-colors"
                             to='/'>
                             <BsBarChart />
@@ -45,7 +45,7 @@ const Sidebar = () => {
                     <li>
                         <Link
                             className="flex items-center text-sm gap-4 py-2 px-4 rounded-lg hover:bg-[#131517] transition-colors"
-                            to='/'>
+                            to='/clientes'>
                             <FaRegBuilding />
                             Clientes
                         </Link>
@@ -53,7 +53,7 @@ const Sidebar = () => {
                     <li>
                         <Link
                             className="flex items-center text-sm gap-4 py-2 px-4 rounded-lg hover:bg-[#131517] transition-colors"
-                            to='/'>
+                            to='/oportunidades'>
                             <BsBullseye />
                             Oportunidades
                         </Link>

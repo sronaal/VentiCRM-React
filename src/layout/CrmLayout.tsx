@@ -1,5 +1,5 @@
+import { Outlet } from "react-router-dom"
 import Header from "../components/crm/Header"
-import MainContent from "../components/crm/MainContent"
 import Sidebar from "../components/crm/Sidebar"
 
 const CrmLayout = () => {
@@ -9,7 +9,7 @@ const CrmLayout = () => {
       <Sidebar />
       <div className="h-full overflow-y-scroll scroll-hidden p-8">
         <Header/>
-        <MainContent />
+        <Outlet/>
       </div>
     </div>
   )
