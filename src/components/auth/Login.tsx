@@ -1,10 +1,10 @@
-import {  useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ToastContainer, toast } from 'react-toastify';
 import { FaRegUser } from "react-icons/fa6";
 import { FaKey } from "react-icons/fa6";
+import { FcGoogle } from "react-icons/fc";
 
 import { schemaLoginForm } from '../../lib/zod'
 import { iniciarSesion } from "../../services/auth.service";
@@ -23,6 +23,7 @@ const LoginForm = () => {
     const onSubmit = (credenciales: z.infer<typeof schemaLoginForm>) => {
         iniciarSesion(credenciales)
             .then(({ data, status }) => {
+                localStorage.setItem('token', data.token)
                 console.log(data, status)
             })
             .catch((error) => {
@@ -30,13 +31,13 @@ const LoginForm = () => {
                     toast.error('Servidor no disponible')
                     setTimeout(() => {
                         window.location.reload()
-                    },6000)
+                    }, 6000)
                 }
                 if (error.response.status == 401) {
                     toast.error('Correo y/o contraseña invalidos')
                     setTimeout(() => {
                         window.location.reload()
-                    },6000)
+                    }, 6000)
                 }
 
 
@@ -47,9 +48,13 @@ const LoginForm = () => {
     return (
         <div>
             <div className='flex flex-col p-5 card bg-base-200 h-auto w-90 '>
-                <ToastContainer/>
-                <h1 className='text-xl card-title mx-auto  uppercase mb-8'>Iniciar Sesión</h1>
+                <ToastContainer />
+                <h1 className='text-xl card-title mx-auto  uppercase mb-4'>Iniciar Sesión</h1>
 
+                <button className="btn text-gray-700 bg-[#FFD6A7] mb-4">
+                    <FcGoogle/>
+                    Iniciar Sesión con Google
+                </button>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <legend className="text-sm not-visited:fieldset mb-2">Correo electronico</legend>
                     <label className="input validator mb-4">
