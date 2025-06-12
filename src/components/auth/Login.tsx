@@ -8,10 +8,11 @@ import { FcGoogle } from "react-icons/fc";
 
 import { schemaLoginForm } from '../../lib/zod'
 import { iniciarSesion } from "../../services/auth.service";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
 
-    const { register, handleSubmit } = useForm<z.infer<typeof schemaLoginForm>>({
+    const { register, handleSubmit, reset } = useForm<z.infer<typeof schemaLoginForm>>({
         resolver: zodResolver(schemaLoginForm),
         defaultValues: {
             email: '',
@@ -19,25 +20,24 @@ const LoginForm = () => {
         }
     })
 
+    const navigate = useNavigate()
 
     const onSubmit = (credenciales: z.infer<typeof schemaLoginForm>) => {
         iniciarSesion(credenciales)
-            .then(({ data, status }) => {
+            .then(({ data }) => {
                 localStorage.setItem('token', data.token)
-                console.log(data, status)
+                localStorage.setItem('user', JSON.stringify(data.user))
+                navigate('/', { replace: true })
+
             })
             .catch((error) => {
                 if (error.code === 'ERR_NETWORK') {
                     toast.error('Servidor no disponible')
-                    setTimeout(() => {
-                        window.location.reload()
-                    }, 6000)
+                    reset()
                 }
                 if (error.response.status == 401) {
                     toast.error('Correo y/o contraseña invalidos')
-                    setTimeout(() => {
-                        window.location.reload()
-                    }, 6000)
+                    reset()
                 }
 
 
@@ -52,7 +52,7 @@ const LoginForm = () => {
                 <h1 className='text-xl card-title mx-auto  uppercase mb-4'>Iniciar Sesión</h1>
 
                 <button className="btn text-gray-700 bg-[#FFD6A7] mb-4">
-                    <FcGoogle/>
+                    <FcGoogle />
                     Iniciar Sesión con Google
                 </button>
                 <form onSubmit={handleSubmit(onSubmit)}>
