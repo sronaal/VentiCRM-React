@@ -7,6 +7,8 @@ import { BsBox2Heart } from "react-icons/bs";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { RiCloseLine } from "react-icons/ri";
 import { RiMenu3Line } from "react-icons/ri";
+import { FaRegUser } from "react-icons/fa";
+
 import { useNavigate } from "react-router-dom";
 
 import { useState } from "react";
@@ -27,7 +29,7 @@ const Sidebar = () => {
     }
 
     return (
-        <div className={`xl:h-[100vh] overflow-y-scroll scroll-hidden  fixed xl:static w-[80%] xl:w-full md:w-[40%] h-full  top-0 border-r-1 p-4 flex flex-col justify-between z-50 ${showMenu ? "left-0" : "-left-full"} transition-all duration-300`}>
+        <div className={`xl:h-[100vh] overflow-y-scroll scroll-hidden  bg-[#042c3b] fixed xl:static w-[80%] xl:w-full md:w-[40%] h-full  top-0 border-r-1 p-4 flex flex-col justify-between z-50 ${showMenu ? "left-0" : "-left-full"} transition-all duration-300`}>
             <div>
                 <h1 className='text-center p-4 text-2xl font-bold text-white mb-10'>VentiCRM</h1>
 
@@ -73,6 +75,15 @@ const Sidebar = () => {
                             to='/'>
                             <BsBox2Heart />
                             Productos
+                        </Link>
+                    </li>
+
+                     <li>
+                        <Link
+                            className="flex items-center text-sm gap-4 py-2 px-4 rounded-lg hover:bg-[#131517] transition-colors"
+                            to='/usuarios'>
+                            <FaRegUser />
+                            Usuarios
                         </Link>
                     </li>
                 </ul>

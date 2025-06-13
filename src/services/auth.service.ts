@@ -8,3 +8,4 @@ export const iniciarSesion = (credenciales : AuthInterface) => {
     console.log(credenciales)
     return axios.post(`${URLBACKEND}auth/login`, credenciales)
 }
+

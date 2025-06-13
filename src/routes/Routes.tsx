@@ -6,6 +6,7 @@ import ProtectedRoute from './ProtectedRoute'
 import Clientes from '../pages/crm/Clientes'
 import Oportunidades from '../pages/crm/Oportunidades'
 import Dashboard from '../pages/crm/Dashboard'
+import Usuarios from '../pages/crm/Usuarios'
 
 const AppRoutes = () => {
     return (
@@ -18,6 +19,7 @@ const AppRoutes = () => {
                 <Route path='/' element={<ProtectedRoute />}>
                     <Route path='/' element={<CrmLayout />}>
                         <Route path='/' element={<Dashboard/>}></Route>
+                        <Route path='usuarios' element={<Usuarios/>}></Route>
                         <Route path='clientes' element={<Clientes />}></Route>
                         <Route path='oportunidades' element={<Oportunidades/>}></Route>
                     </Route>
