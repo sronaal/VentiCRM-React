@@ -2,11 +2,13 @@ import { useForm } from "react-hook-form"
 import type { z } from "zod"
 import { schemaCrearUsuario } from '../../../lib/zod'
 import { zodResolver } from "@hookform/resolvers/zod"
+import { crearUsuario } from "../../../services/usuarios.service"
+import { ToastContainer, toast } from 'react-toastify';
 
 const ModalProduct = () => {
 
 
-  const { register, handleSubmit, formState: { errors } } = useForm<z.infer<typeof schemaCrearUsuario>>({
+  const { register, handleSubmit, formState: { errors },reset } = useForm<z.infer<typeof schemaCrearUsuario>>({
     resolver: zodResolver(schemaCrearUsuario),
     defaultValues: {
       email: '',
@@ -18,16 +20,27 @@ const ModalProduct = () => {
     }
   })
 
-  const crearUsuario = (usuario: z.infer<typeof schemaCrearUsuario>) => {
+  const onCrearUsuario = (usuario: z.infer<typeof schemaCrearUsuario>) => {
     console.log(usuario)
+    crearUsuario(usuario)
+      .then(({ data }) => {
+        toast.success('Usuario creado')
+        reset()
+        window.location.reload()
+        console.log(data)
+      }).catch((error) => {
+        console.log(error)
+      })
   }
+  
   return (
     <dialog id="crearUsuario" className="modal p-4">
       <div className="modal-box h-auto w-full max-w-xl">
         <form method="dialog" className="mb-4">
           <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 mb-5">✕</button>
         </form>
-        <form onSubmit={handleSubmit(crearUsuario)}>
+        <form onSubmit={handleSubmit(onCrearUsuario)}>
+          
           {errors.estado && <p className="text-red-500 text-xs">{errors.estado.message}</p>}
           <h1 className="text-2xl mb-2">Crear Usuario Nuevo</h1>
           <legend className="text-xs text-gray-300 mb-4">Complete la información para crear un nuevo usuario en el sistema</legend>
@@ -73,6 +86,7 @@ const ModalProduct = () => {
           </div>
         </form>
       </div>
+      <ToastContainer/>
     </dialog>
 
   )

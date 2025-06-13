@@ -2,7 +2,6 @@ import type { InterfaceUsuario } from "../../../pages/crm/interfaces/Usuario.int
 
 
 const RowTable = ({email,name,role,estado} : InterfaceUsuario) => {
-    console.log(estado)
     return (
         <tr>
             <th>

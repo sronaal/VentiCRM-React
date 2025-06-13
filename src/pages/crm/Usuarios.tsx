@@ -17,7 +17,6 @@ const Usuarios = () => {
     useEffect(() => {
         obtenerUsuarios()
             .then(({ data }) => {
-                console.log(data)
                 setUsuarios(data)
             })
             .catch((error) => {
@@ -43,7 +42,6 @@ const Usuarios = () => {
         setSelectRol('');
         setSelectEstado('');
     };
-    console.log(resultFilter)
 
     return (
         <div>
