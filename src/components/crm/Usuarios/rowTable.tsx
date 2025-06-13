@@ -1,7 +1,8 @@
 import type { InterfaceUsuario } from "../../../pages/crm/interfaces/Usuario.interface";
 
 
-const RowTable = ({email,name,role} : InterfaceUsuario) => {
+const RowTable = ({email,name,role,estado} : InterfaceUsuario) => {
+    console.log(estado)
     return (
         <tr>
             <th>
@@ -21,7 +22,14 @@ const RowTable = ({email,name,role} : InterfaceUsuario) => {
             <td>
                 <p>{role}</p>
             </td>
-        
+            <td>
+                {
+                   estado == 'Activo' ? 
+                    <p className="text-green-500">{estado}</p>
+                   : <p className="text-gray-400">{estado}</p>
+
+                }
+            </td>
             <th>
                 <button className="btn btn-ghost btn-xs">details</button>
             </th>

@@ -3,5 +3,6 @@ export interface InterfaceUsuario {
     name:  string;
     email: string;
     role:  string;
+    estado: string
 }
 

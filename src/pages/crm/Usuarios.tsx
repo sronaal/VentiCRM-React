@@ -25,7 +25,6 @@ const Usuarios = () => {
             })
     }, []);
 
-    // 🔎 Filtros combinados
     const resultFilter = usuarios
         .filter((usuario) =>
             usuario.name.toLocaleUpperCase().includes(inputSearch.toLocaleUpperCase().trim()) ||
@@ -39,12 +38,12 @@ const Usuarios = () => {
             return usuario.estado?.toLocaleUpperCase() === selectEstado.toLocaleUpperCase();
         });
 
-    // ♻️ Botón para limpiar filtros
     const handleResetFilters = () => {
         setInputSearch('');
         setSelectRol('');
         setSelectEstado('');
     };
+    console.log(resultFilter)
 
     return (
         <div>
@@ -106,6 +105,7 @@ const Usuarios = () => {
                                 </th>
                                 <th>Nombre</th>
                                 <th>Rol</th>
+                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -121,6 +121,7 @@ const Usuarios = () => {
                                 <th></th>
                                 <th>Nombre</th>
                                 <th>Rol</th>
+                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </tfoot>
