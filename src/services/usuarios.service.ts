@@ -19,3 +19,15 @@ export const crearUsuario = (usuario) => {
     }
     return axios.post(`${URLBACKEND}user`, data)
 }
+
+export const editarUsuario = (usuario, id) => {
+
+    const data = {
+        name: usuario.name,
+        email: usuario.email,
+        estado: usuario.estado,
+        rol: usuario.rol
+    }
+
+    return axios.patch(`${URLBACKEND}user/${id}`, data)
+}
