@@ -5,6 +5,7 @@ import { obtenerUsuarios } from "../../services/usuarios.service";
 import RowTable from "../../components/crm/Usuarios/rowTable";
 import type { InterfaceUsuario } from "./interfaces/Usuario.interface";
 import ModalProduct from "../../components/crm/Usuarios/ModalCrearUsuario";
+import ModalEditarUsuario from "../../components/crm/Usuarios/ModalEditarUsuario";
 
 
 const Usuarios = () => {
@@ -13,6 +14,8 @@ const Usuarios = () => {
     const [inputSearch, setInputSearch] = useState('');
     const [selectRol, setSelectRol] = useState('');
     const [selectEstado, setSelectEstado] = useState('');
+    const [usuarioEditar, setUsuarioEditar] = useState<InterfaceUsuario | null>(null);
+
 
     useEffect(() => {
         obtenerUsuarios()
@@ -53,7 +56,7 @@ const Usuarios = () => {
                 </div>
                 <button
                     onClick={() => document.getElementById('crearUsuario')?.showModal()}
-                    className="btn p-6 w-50 text-[15px] hover:bg-[#131517]">
+                    className="btn p-6 w-50 text-[15px] hover:bg-base-100">
                     <FaUserPlus className="size-5 mr-3.5" />
                     Crear Usuario
                 </button>
@@ -81,7 +84,7 @@ const Usuarios = () => {
                         <option value="">Estado</option>
                         <option value="Todos">Todos</option>
                         <option value="Activo">Activo</option>
-                        <option value="Desactivado">Desactivado</option>
+                        <option value="Inactivo">Inactivo</option>
                     </select>
 
                     <button className="cursor-pointer" onClick={handleResetFilters}>
@@ -110,7 +113,7 @@ const Usuarios = () => {
                         <tbody>
                             {
                                 resultFilter.map((usuario, id) => (
-                                    <RowTable key={id} {...usuario} />
+                                    <RowTable key={id} {...usuario} setUsuarioEditar={setUsuarioEditar}/>
                                 ))
                             }
                         </tbody>
@@ -128,6 +131,7 @@ const Usuarios = () => {
             </div>
 
             <ModalProduct />
+            <ModalEditarUsuario usuarioEditar={usuarioEditar}/>
         </div>
     );
 };
