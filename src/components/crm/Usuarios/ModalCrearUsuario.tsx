@@ -21,13 +21,14 @@ const ModalProduct = () => {
   })
 
   const onCrearUsuario = (usuario: z.infer<typeof schemaCrearUsuario>) => {
-    console.log(usuario)
     crearUsuario(usuario)
       .then(({ data }) => {
         toast.success('Usuario creado')
         reset()
-        window.location.reload()
-        console.log(data)
+        setTimeout(() => {
+           window.location.reload()
+        }, 5000)
+        
       }).catch((error) => {
         console.log(error)
       })
@@ -51,7 +52,11 @@ const ModalProduct = () => {
             </div>
             <div className="flex-1 min-w-[200px]">
               <legend className="fieldset">Correo electrónico</legend>
-              <input type="email" {...register('email')} className="input w-full" placeholder="Correo electrónico" />
+              <input 
+              autoComplete="email"
+              type="email" 
+              {...register('email')} 
+              className="input w-full" placeholder="Correo electrónico" />
             </div>
             <div className="flex-1 min-w-[200px]">
               <legend className="fieldset">Rol</legend>
@@ -73,11 +78,19 @@ const ModalProduct = () => {
 
             <div className="flex-1 min-w-[200px]">
               <legend className="fieldset">Contraseña</legend>
-              <input type="password" {...register('password')} className="input w-full" placeholder="Contraseña" />
+              <input 
+              autoComplete="new-password"
+              type="password" 
+              {...register('password')} 
+              className="input w-full" placeholder="Contraseña" />
             </div>
             <div className="flex-1 min-w-[200px]">
               <legend className="fieldset">Confirmar Contraseña</legend>
-              <input type="password" {...register('confirmPassword')} className="input w-full" placeholder="Confirmar contraseña" />
+              <input 
+              autoComplete="new-password"
+              type="password" 
+              {...register('confirmPassword')} 
+              className="input w-full" placeholder="Confirmar contraseña" />
             </div>
 
           </div>

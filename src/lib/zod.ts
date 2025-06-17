@@ -16,3 +16,10 @@ export const schemaCrearUsuario = z.object({
   message: "Las contraseñas no coinciden",
   path: ["confirmPassword"],
 });
+
+export const schemaEditarUsuario = z.object({
+  name: z.string(),
+  email: z.string().email('Correo no valido'),
+  rol: z.string(),
+  estado: z.string()
+})
